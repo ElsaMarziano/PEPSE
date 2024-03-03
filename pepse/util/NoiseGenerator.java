@@ -81,7 +81,6 @@ public class NoiseGenerator {
             value += smoothNoise((x / currentPoint), 0, 0) * currentPoint;
             currentPoint /= 2.0;
         }
-
         return value * factor / startPoint;
     }
 
