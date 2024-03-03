@@ -29,6 +29,4 @@ public class EnergyCounter extends GameObject {
         TextRenderable renderedText = new TextRenderable(Double.toString(currentEnergy));
         this.renderer().setRenderable(renderedText);
     }
-
-
 }

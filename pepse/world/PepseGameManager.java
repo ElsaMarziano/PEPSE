@@ -13,11 +13,15 @@ import pepse.util.pepse.EnergyCounter;
 import pepse.util.pepse.world.daynight.Night;
 import pepse.util.pepse.world.daynight.Sun;
 import pepse.util.pepse.world.daynight.SunHalo;
+import pepse.util.pepse.world.trees.StaticTree;
+import pepse.util.pepse.world.trees.Trees;
 
 import java.util.List;
 
 public class PepseGameManager extends GameManager {
     private static final float DAY_CYCLE_LENGTH = 30;
+    private Terrain terrain;
+
     public static void main(String[] args) {
         new PepseGameManager().run();
     }
@@ -37,6 +41,7 @@ public class PepseGameManager extends GameManager {
         gameObjects().addGameObject(night, Layer.BACKGROUND);
         GameObject sunHalo = SunHalo.create(sun);
         gameObjects().addGameObject(sunHalo, Layer.BACKGROUND);
+        // TODO Make avatar start from right corner
         Avatar avatar = new Avatar(windowController.getWindowDimensions().mult(0.5f),
                 inputListener,
                 imageReader);
@@ -44,11 +49,16 @@ public class PepseGameManager extends GameManager {
         GameObject energyCounter = new EnergyCounter(Vector2.ONES.mult(50),
                 avatar::getCurrentEnergy);
         gameObjects().addGameObject(energyCounter, Layer.STATIC_OBJECTS);
+        List<GameObject> trees = Trees.createTrees(windowController.getWindowDimensions(),
+                this.terrain::groundHeightAt);
+        for (GameObject tree: trees) {
+            gameObjects().addGameObject(tree, Layer.STATIC_OBJECTS);
+        }
 
     }
 
     private void createGround(WindowController windowController) {
-        Terrain terrain = new Terrain(windowController.getWindowDimensions(), 1);
+        this.terrain = new Terrain(windowController.getWindowDimensions(), 1);
         List<Block> ground = terrain.createInRange(0, (int) windowController.getWindowDimensions().x());
         for (Block block: ground) {
             gameObjects().addGameObject(block, Layer.STATIC_OBJECTS);

@@ -25,7 +25,7 @@ public class Terrain {
      */
     public Terrain(Vector2 windowDimensions, int seed) {
         this.groundHeightAtX0 = windowDimensions.y() * 0.6f;
-        this.noiseGenerator = new NoiseGenerator(0, seed);
+        this.noiseGenerator = new NoiseGenerator((double) seed, (int) groundHeightAtX0);
     }
 
     /**

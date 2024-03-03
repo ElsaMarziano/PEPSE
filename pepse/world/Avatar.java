@@ -26,7 +26,6 @@ class Avatar extends GameObject  {
         physics().preventIntersectionsFromDirection(Vector2.ZERO);
         transform().setAccelerationY(GRAVITY);
         this.inputListener = inputListener;
-
     }
 
     public Avatar(Vector2 pos, UserInputListener inputListener, ImageReader imageReader) {
