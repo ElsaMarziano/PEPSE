@@ -11,6 +11,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 class Avatar extends GameObject  {
+    /**
+     * Constant field for avatar dimensions
+     */
+    public static final float AVATAR_DIMENSIONS = 50;
     private static final float VELOCITY_X = 400;
     private static final float VELOCITY_Y = -650;
     private static final float GRAVITY = 600;
@@ -22,30 +26,30 @@ class Avatar extends GameObject  {
     private final UserInputListener inputListener;
 
     public Avatar(Vector2 pos, UserInputListener inputListener) {
-        super(pos, Vector2.ONES.mult(50), new OvalRenderable(AVATAR_COLOR));
+        super(pos, Vector2.ONES.mult(AVATAR_DIMENSIONS), new OvalRenderable(AVATAR_COLOR));
         physics().preventIntersectionsFromDirection(Vector2.ZERO);
         transform().setAccelerationY(GRAVITY);
         this.inputListener = inputListener;
     }
 
     public Avatar(Vector2 pos, UserInputListener inputListener, ImageReader imageReader) {
-        super(pos, Vector2.ONES.mult(50),
-                imageReader.readImage("pepse/idleImages/idle_0.png", true));
+        super(pos, Vector2.ONES.mult(AVATAR_DIMENSIONS),
+                imageReader.readImage("pepse/util/idleImages/idle_0.png", true));
         physics().preventIntersectionsFromDirection(Vector2.ZERO);
         transform().setAccelerationY(GRAVITY);
         this.inputListener = inputListener;
         this.jumpAnimation = new AnimationRenderable(
-        new String[]{"pepse/jumpImages/jump_0.png", "pepse/jumpImages/jump_1.png", "pepse" +
-                "/jumpImages/jump_2.png", "pepse/jumpImages/jump_3.png"}, imageReader,
+        new String[]{"pepse/util/jumpImages/jump_0.png", "pepse/util/jumpImages/jump_1.png", "pepse/util" +
+                "/jumpImages/jump_2.png", "pepse/util/jumpImages/jump_3.png"}, imageReader,
                 true, 0.2);
         this.idleAnimation = new AnimationRenderable(
-                new String[]{"pepse/idleImages/idle_0.png", "pepse/idleImages/idle_1.png",
-                        "pepse/idleImages/idle_2.png", "pepse/idleImages/idle_3.png"}, imageReader,
+                new String[]{"pepse/util/idleImages/idle_0.png", "pepse/util/idleImages/idle_1.png",
+                        "pepse/util/idleImages/idle_2.png", "pepse/util/idleImages/idle_3.png"}, imageReader,
                 true, 0.5);
         this.runAnimation = new AnimationRenderable(
-                new String[]{"pepse/runImages/run_0.png", "pepse/runImages/run_1.png", "pepse" +
-                        "/runImages/run_2.png", "pepse/runImages/run_3.png", "pepse/runImages" +
-                        "/run_4.png", "pepse/runImages/run_5.png"}, imageReader,
+                new String[]{"pepse/util/runImages/run_0.png", "pepse/util/runImages/run_1.png", "pepse/util" +
+                        "/runImages/run_2.png", "pepse/util/runImages/run_3.png", "pepse/util/runImages" +
+                        "/run_4.png", "pepse/util/runImages/run_5.png"}, imageReader,
                 true, 0.2);
         this.renderer().setRenderable(this.idleAnimation);
     }
@@ -79,13 +83,12 @@ class Avatar extends GameObject  {
                 this.energy -= 10;
             if(this.jumpAnimation != null) this.renderer().setRenderable(this.jumpAnimation);
         } else if (inputListener.pressedKeys().isEmpty() ){
-            if(this.energy <=99 && getVelocity().y() == 0) {
-                this.energy += 1;
+            if(this.energy <=100 && getVelocity().y() == 0) {
+                this.energy = Math.min(100, this.energy + 1);
                 if(this.idleAnimation != null) this.renderer().setRenderable(this.idleAnimation);
 
             }
             transform().setVelocityX(xVel);
-
         }
     }
 
@@ -96,5 +99,11 @@ class Avatar extends GameObject  {
     public void addEnergy(double energy) {
         this.energy += energy;
     }
+
+    @Override
+    public String getTag() {
+        return "Avatar";
+    }
+
 
 }

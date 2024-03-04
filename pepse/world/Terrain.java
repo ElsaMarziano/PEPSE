@@ -16,7 +16,7 @@ public class Terrain {
     private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
     private static final int TERRAIN_DEPTH = 20;
     private final NoiseGenerator noiseGenerator;
-    private float groundHeightAtX0;
+    private final float groundHeightAtX0;
 
     /**
      * Initialize the terrain
@@ -24,7 +24,7 @@ public class Terrain {
      * @param seed something
      */
     public Terrain(Vector2 windowDimensions, int seed) {
-        this.groundHeightAtX0 = windowDimensions.y() * 0.6f;
+        this.groundHeightAtX0 = windowDimensions.y() * 2/3;
         this.noiseGenerator = new NoiseGenerator((double) seed, (int) groundHeightAtX0);
     }
 
@@ -44,14 +44,13 @@ public class Terrain {
         List<Block> blocks = new ArrayList<>();
         for (int i = minX; i <= maxX; i+=Block.SIZE) {
             float height = groundHeightAt(i);
-            int top = (int) (height / Block.SIZE) * Block.SIZE;
+            int top = (int) Math.floor(height / Block.SIZE) * Block.SIZE;
             for (int j = top; j <= top + TERRAIN_DEPTH * Block.SIZE; j+=Block.SIZE) {
                 Block block = new Block(new Vector2(i, j), renderable);
                 block.setTag("ground");
                 blocks.add(block);
             }
         }
-
         return blocks;
     }
 
