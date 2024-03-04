@@ -31,6 +31,7 @@ public class PepseGameManager extends GameManager {
                                UserInputListener inputListener,
                                WindowController windowController) {
         super.initializeGame(imageReader, soundReader, inputListener, windowController);
+        float window_x = windowController.getWindowDimensions().x();
         GameObject sky = Sky.create(windowController.getWindowDimensions());
         // TODO In pdf they said to add it to "skylayer" but no idea what that is
         gameObjects().addGameObject(sky, Layer.BACKGROUND);
@@ -41,15 +42,16 @@ public class PepseGameManager extends GameManager {
         gameObjects().addGameObject(night, Layer.BACKGROUND);
         GameObject sunHalo = SunHalo.create(sun);
         gameObjects().addGameObject(sunHalo, Layer.BACKGROUND);
-        // TODO Make avatar start from right corner
-        Avatar avatar = new Avatar(windowController.getWindowDimensions().mult(0.5f),
-                inputListener,
-                imageReader);
+        Avatar avatar =
+                new Avatar(
+                        new Vector2(window_x - Avatar.AVATAR_DIMENSIONS,
+                                terrain.groundHeightAt(window_x) - Avatar.AVATAR_DIMENSIONS),
+                inputListener, imageReader);
         gameObjects().addGameObject(avatar);
         GameObject energyCounter = new EnergyCounter(Vector2.ONES.mult(50),
                 avatar::getCurrentEnergy);
         gameObjects().addGameObject(energyCounter, Layer.STATIC_OBJECTS);
-        List<GameObject> trees = Trees.createTrees(windowController.getWindowDimensions(),
+        List<GameObject> trees = Trees.createTrees(window_x,
                 this.terrain::groundHeightAt);
         for (GameObject tree: trees) {
             gameObjects().addGameObject(tree, Layer.STATIC_OBJECTS);
