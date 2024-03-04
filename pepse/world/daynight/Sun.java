@@ -25,7 +25,7 @@ public class Sun{
     public static GameObject create(Vector2 windowDimensions,
                                     float cycleLength){
         float centerX = (windowDimensions.x() - SUN_SIZE) / 2;
-        float centerY = (windowDimensions.y() - SUN_SIZE) / 2;
+        float centerY = 2 * (windowDimensions.y() - SUN_SIZE) / 3;
 
         Vector2 startTopLeftCorner = new Vector2(centerX, centerY);
         Vector2 dimensions = new Vector2(SUN_SIZE, SUN_SIZE);
