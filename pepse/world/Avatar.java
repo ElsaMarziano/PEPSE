@@ -100,10 +100,6 @@ class Avatar extends GameObject  {
         this.energy += energy;
     }
 
-    @Override
-    public String getTag() {
-        return "Avatar";
-    }
 
 
 }
