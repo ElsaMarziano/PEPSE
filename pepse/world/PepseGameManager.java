@@ -59,6 +59,11 @@ public class PepseGameManager extends GameManager {
             for(GameObject leave: leaves) {
                 gameObjects().addGameObject(leave);
             }
+            List<GameObject> fruits = Trees.createFruits(tree.getTopLeftCorner(),
+                    avatar::addEnergy);
+            for(GameObject fruit: fruits) {
+                gameObjects().addGameObject(fruit);
+            }
         }
 
     }

@@ -97,9 +97,12 @@ class Avatar extends GameObject  {
     }
 
     public void addEnergy(double energy) {
-        this.energy += energy;
+
+        this.energy = Math.min(this.energy + energy, 100);
     }
 
-
-
+    @Override
+    public String getTag() {
+        return "Avatar";
+    }
 }

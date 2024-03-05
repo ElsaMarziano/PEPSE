@@ -11,6 +11,7 @@ import pepse.util.pepse.world.Block;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 
@@ -40,15 +41,35 @@ public class Trees {
             for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE / 2) {
                 if (random.nextFloat() <= 0.1) {
                     Vector2 pos = treeTop.add(new Vector2(i, j));
-                    GameObject leave = new GameObject(pos,
+                    GameObject leaf = new GameObject(pos,
                             Vector2.ONES.mult((float) Block.SIZE),
                             new RectangleRenderable(ColorSupplier.approximateColor(LEAVE_COLOR)));
-//                    new ScheduledTask( leave,  random.nextFloat(),true, leave.transform().)
-
-                    leaves.add(leave);
+                    new ScheduledTask( leaf,  random.nextFloat(),false,
+                            () -> new Transition<Float>(
+                                    leaf, leaf.renderer()::setRenderableAngle, 175f,
+                                    195f,
+                                    Transition.CUBIC_INTERPOLATOR_FLOAT, 4f,
+                                    Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null));
+                    ;
+                    leaves.add(leaf);
                 }
                 }
         }
         return leaves;
+    }
+
+    public static List<GameObject> createFruits(Vector2 treeTop,
+                                                Consumer<Integer> onAvatarCollision) {
+        List<GameObject> fruits = new ArrayList<>();
+        Random random = new Random();
+        for(int i=-LEAVES_RADIUS; i< LEAVES_RADIUS; i+=Block.SIZE ) {
+            for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE ) {
+                if (random.nextFloat() <= 0.3) {
+                    GameObject fruit = new Fruit(treeTop.add(new Vector2(i, j)), onAvatarCollision);
+                    fruits.add(fruit);
+                }
+            }
+        }
+        return fruits;
     }
 }
