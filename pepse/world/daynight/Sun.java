@@ -58,6 +58,7 @@ public class Sun{
                 Transition.TransitionType.TRANSITION_LOOP,
                 null);
 
+
         return sun;
     }
 
