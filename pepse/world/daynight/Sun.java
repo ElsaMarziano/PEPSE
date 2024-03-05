@@ -39,21 +39,22 @@ public class Sun{
         float initialAngle = 0f;
         float finalAngle = 360f;
 
+        float angularVelocity = finalAngle / cycleLength;
+
         new Transition<Float>(
                 sun,
                 value -> {
                     // Calculate the new position based on the current time
-                    double timeRatio = value / cycleLength;
-                    double angle = 2 * Math.PI * timeRatio;
-                    double radius = Math.min(windowDimensions.x(),
-                            windowDimensions.y()) / 2 - SUN_SIZE / 2;
-                    double newX = centerX + radius * Math.cos(angle);
-                    double newY = centerY + radius * Math.sin(angle);
+                    double angle = initialAngle + (angularVelocity * value) % 360;
+                    double angleRad = Math.toRadians(angle);
+                    double radius = Math.min(windowDimensions.x() / 2, centerY) - SUN_SIZE / 2;
+                    double newX = centerX + radius * Math.cos(angleRad);
+                    double newY = centerY + radius * Math.sin(angleRad);
                     sun.setCenter(new Vector2((float)newX, (float)newY));
                 },
                 initialAngle, finalAngle,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
-                cycleLength,
+                cycleLength * 10,
                 Transition.TransitionType.TRANSITION_LOOP,
                 null);
 
