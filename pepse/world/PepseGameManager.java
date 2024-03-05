@@ -54,6 +54,7 @@ public class PepseGameManager extends GameManager {
         List<GameObject> trees = Trees.createTrees(window_x,
                 this.terrain::groundHeightAt);
         for (GameObject tree: trees) {
+            avatar.registerObserver(tree);
             gameObjects().addGameObject(tree, Layer.STATIC_OBJECTS);
             List<GameObject> leaves = Trees.createLeaves(tree.getTopLeftCorner());
             for(GameObject leave: leaves) {

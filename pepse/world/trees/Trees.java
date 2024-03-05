@@ -6,6 +6,7 @@ import danogl.components.Transition;
 import danogl.gui.rendering.RectangleRenderable;
 import danogl.util.Vector2;
 import pepse.util.pepse.util.ColorSupplier;
+import pepse.util.pepse.world.AvatarObserver;
 import pepse.util.pepse.world.Block;
 
 import java.awt.*;
@@ -17,6 +18,7 @@ import java.util.function.Function;
 public class Trees {
     private static final int LEAVES_RADIUS = 50;
     private static final Color LEAVE_COLOR = new Color(50, 200, 30);
+
 
     public static List<GameObject> createTrees(float window_x,
                                            Function<Float, Float> groundHeightAt) {
@@ -51,4 +53,5 @@ public class Trees {
         }
         return leaves;
     }
+
 }

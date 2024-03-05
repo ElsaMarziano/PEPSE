@@ -9,6 +9,7 @@ import danogl.util.Vector2;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 class Avatar extends GameObject  {
     /**
@@ -24,6 +25,7 @@ class Avatar extends GameObject  {
     private AnimationRenderable idleAnimation = null;
     private double energy = 100;
     private final UserInputListener inputListener;
+    private final ArrayList<AvatarObserver> observers = new ArrayList<AvatarObserver>();
 
     public Avatar(Vector2 pos, UserInputListener inputListener) {
         super(pos, Vector2.ONES.mult(AVATAR_DIMENSIONS), new OvalRenderable(AVATAR_COLOR));
@@ -81,6 +83,7 @@ class Avatar extends GameObject  {
         } else if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && getVelocity().y() == 0 && this.energy >= 10) {
                 transform().setVelocityY(VELOCITY_Y);
                 this.energy -= 10;
+                this.notifyObservers();
             if(this.jumpAnimation != null) this.renderer().setRenderable(this.jumpAnimation);
         } else if (inputListener.pressedKeys().isEmpty() ){
             if(this.energy <=100 && getVelocity().y() == 0) {
@@ -100,6 +103,15 @@ class Avatar extends GameObject  {
         this.energy += energy;
     }
 
+    public void registerObserver(GameObject observer) {
+        observers.add((AvatarObserver) observer);
+    }
+
+    private void notifyObservers() {
+        for (AvatarObserver observer : observers) {
+            observer.notifyJump();
+        }
+    }
 
 
 }
