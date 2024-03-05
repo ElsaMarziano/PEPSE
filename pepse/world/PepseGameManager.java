@@ -55,6 +55,10 @@ public class PepseGameManager extends GameManager {
                 this.terrain::groundHeightAt);
         for (GameObject tree: trees) {
             gameObjects().addGameObject(tree, Layer.STATIC_OBJECTS);
+            List<GameObject> leaves = Trees.createLeaves(tree.getTopLeftCorner());
+            for(GameObject leave: leaves) {
+                gameObjects().addGameObject(leave);
+            }
         }
 
     }

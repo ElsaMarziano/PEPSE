@@ -43,8 +43,8 @@ public class Terrain {
                 new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
         List<Block> blocks = new ArrayList<>();
         for (int i = minX; i <= maxX; i+=Block.SIZE) {
-            float height = groundHeightAt(i);
-            int top = (int) Math.floor(height / Block.SIZE) * Block.SIZE;
+            int top = (int) groundHeightAt(i);
+//            int top = (int) Math.floor(groundHeightAt(i) / Block.SIZE) * Block.SIZE;
             for (int j = top; j <= top + TERRAIN_DEPTH * Block.SIZE; j+=Block.SIZE) {
                 Block block = new Block(new Vector2(i, j), renderable);
                 block.setTag("ground");
