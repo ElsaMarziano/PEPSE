@@ -16,7 +16,7 @@ class Avatar extends GameObject  {
      */
     public static final float AVATAR_DIMENSIONS = 50;
     private static final float VELOCITY_X = 400;
-    private static final float VELOCITY_Y = -650;
+    private static final float VELOCITY_Y = -450;
     private static final float GRAVITY = 600;
     private static final Color AVATAR_COLOR = Color.DARK_GRAY;
     private AnimationRenderable runAnimation = null;

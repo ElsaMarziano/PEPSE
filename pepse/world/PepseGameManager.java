@@ -19,7 +19,7 @@ import pepse.util.pepse.world.trees.Trees;
 import java.util.List;
 
 public class PepseGameManager extends GameManager {
-    private static final float DAY_CYCLE_LENGTH = 30;
+    public static final float DAY_CYCLE_LENGTH = 30;
     private Terrain terrain;
 
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ import danogl.components.ScheduledTask;
 import danogl.gui.rendering.OvalRenderable;
 import danogl.util.Vector2;
 import pepse.util.pepse.world.Block;
+import pepse.util.pepse.world.PepseGameManager;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -26,7 +27,7 @@ public class Fruit extends GameObject {
         if(other.getTag().equals("Avatar") && this.renderer().getRenderable() != null){
             this.onCollidedWithAvatar.accept(10);
             this.renderer().setRenderable(null);
-            new ScheduledTask(this,  30f,false,
+            new ScheduledTask(this, PepseGameManager.DAY_CYCLE_LENGTH,false,
                     () -> this.renderer().setRenderable(new OvalRenderable(FRUIT_COLOR))
                     );
         }
