@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class StaticTree extends GameObject  implements AvatarObserver {
+    private static final Color INITIAL_BROWN = new Color(100, 50, 20);
     private Color treeColor;
 
     private Color[] brownShades = {
@@ -21,9 +22,8 @@ public class StaticTree extends GameObject  implements AvatarObserver {
 
     public StaticTree(Vector2 topLeftCorner, float size) {
         super(topLeftCorner, new Vector2(Block.SIZE, size),
-                new RectangleRenderable(new Color(100, 50, 20)
-        ));
-        this.treeColor = new Color(100, 50, 20);
+                new RectangleRenderable(INITIAL_BROWN));
+        this.treeColor = INITIAL_BROWN;
         physics().preventIntersectionsFromDirection(Vector2.ZERO);
         physics().setMass(GameObjectPhysics.IMMOVABLE_MASS);
     }

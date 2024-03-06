@@ -40,8 +40,8 @@ public class Fruit extends GameObject implements AvatarObserver {
     }
 
     /**
-     * Handles collision with avatar, disappears when collidin with it an reapearring only after
-     * 30 seconds
+     * Handles collision with avatar, disappears when collidin with it a reapearring
+     * only after 30 seconds
      * @param other The GameObject with which a collision occurred.
      * @param collision Information regarding this collision.
      *                  A reasonable elastic behavior can be achieved with:
@@ -54,7 +54,8 @@ public class Fruit extends GameObject implements AvatarObserver {
         if(other.getTag().equals("Avatar") && this.renderer().getRenderable() != null){
             this.onCollidedWithAvatar.run();
             this.renderer().setRenderable(null);
-            new ScheduledTask(this, PepseGameManager.DAY_CYCLE_LENGTH,false,
+            new ScheduledTask(this, PepseGameManager.DAY_CYCLE_LENGTH,
+                    false,
                     () -> this.renderer().setRenderable(new OvalRenderable(FRUIT_COLOR)));
         }
     }

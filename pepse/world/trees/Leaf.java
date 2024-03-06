@@ -17,6 +17,11 @@ import java.util.Random;
  */
 public class Leaf extends GameObject implements AvatarObserver {
     private static final Color LEAVE_COLOR = new Color(50, 200, 30);
+    private static final float SWAY_ANGLE_MIN = 175f;
+    private static final float SWAY_ANGLE_MAX = 195f;
+    private static final float SWAY_DURATION = 4f;
+    private static final float ROTATION_ANGLE = 90f;
+    private static final float ROTATION_DURATION = 4f;
 
     /**
      * Constructs a Leaf object at the specified position.
@@ -31,8 +36,8 @@ public class Leaf extends GameObject implements AvatarObserver {
         new ScheduledTask( this,  random.nextFloat(),false,
                 () -> new Transition<Float>(
                         this, this.renderer()::setRenderableAngle,
-                        175f, 195f,
-                        Transition.CUBIC_INTERPOLATOR_FLOAT, 4f,
+                        SWAY_ANGLE_MIN, SWAY_ANGLE_MAX,
+                        Transition.CUBIC_INTERPOLATOR_FLOAT, SWAY_DURATION,
                         Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
                         null));
         ;
@@ -45,8 +50,8 @@ public class Leaf extends GameObject implements AvatarObserver {
     public void notifyJump() {
         new Transition<Float>(
             this, this.renderer()::setRenderableAngle,
-            0f, 90f,
-            Transition.CUBIC_INTERPOLATOR_FLOAT, 4f,
+            0f, ROTATION_ANGLE,
+            Transition.CUBIC_INTERPOLATOR_FLOAT, ROTATION_DURATION,
             Transition.TransitionType.TRANSITION_ONCE,
             null);
     }

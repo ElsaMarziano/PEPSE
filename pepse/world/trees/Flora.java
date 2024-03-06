@@ -20,6 +20,9 @@ import java.util.function.Function;
  */
 public class Flora {
     private static final int LEAVES_RADIUS = 50;
+    private static final float TREE_CREATION_PROBABILITY = 0.1f;
+    private static final float LEAF_CREATION_PROBABILITY = 0.1f;
+    private static final float FRUIT_CREATION_PROBABILITY = 0.3f;
     private final Function<Float, Float> getGroundHeight;
     private final Runnable onAvatarCollision;
 
@@ -50,7 +53,7 @@ public class Flora {
         for(GameObject tree: trees) {
             this.createLeaves(tree.getTopLeftCorner(), leaves);
             this.createFruits(tree.getTopLeftCorner(), this.onAvatarCollision, fruits);
-            
+
         }
         objectsToAdd.put("Trees", trees);
         objectsToAdd.put("Leaves", leaves);
@@ -66,7 +69,7 @@ public class Flora {
         List<GameObject> trees = new ArrayList<>();
         Random random = new Random();
         for(int i =minX; i<=maxX; i+= Block.SIZE) {
-            if (random.nextFloat() <= 0.1){
+            if (random.nextFloat() <= TREE_CREATION_PROBABILITY){
                 int height = random.nextInt(10*Block.SIZE- 4*Block.SIZE + 1) + 4 *Block.SIZE;
                 StaticTree tree = new StaticTree(new Vector2(i,
                         groundHeightAt.apply((float) i) - height), height);
@@ -83,7 +86,7 @@ public class Flora {
         Random random = new Random();
         for(int i=-LEAVES_RADIUS; i< LEAVES_RADIUS; i+=Block.SIZE) {
             for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE) {
-                if (random.nextFloat() <= 0.1) {
+                if (random.nextFloat() <= LEAF_CREATION_PROBABILITY) {
                     Vector2 pos = treeTop.add(new Vector2(i, j));
                     GameObject leaf = new Leaf(pos);
                     leaves.add(leaf);
@@ -100,7 +103,7 @@ public class Flora {
         Random random = new Random();
         for(int i=-LEAVES_RADIUS; i< LEAVES_RADIUS; i+=Block.SIZE ) {
             for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE ) {
-                if (random.nextFloat() <= 0.3) {
+                if (random.nextFloat() <= FRUIT_CREATION_PROBABILITY) {
                     GameObject fruit = new Fruit(treeTop.add(new Vector2(i, j)), onAvatarCollision);
                     fruits.add(fruit);
                 }

@@ -11,6 +11,7 @@ import java.awt.*;
  */
 public class SunHalo {
     private static final float HALO_SIZE = 100;
+    private static final Color COLOR_OF_SUN_HALO = new Color(255, 255, 0, 20);
 
     /**
      * Creates a new halo for the sun
@@ -20,7 +21,7 @@ public class SunHalo {
     public static GameObject create(GameObject sun){
         Vector2 initialPosition = sun.getCenter();
         float haloSize = HALO_SIZE;
-        OvalRenderable haloRenderable = new OvalRenderable(new Color(255, 255, 0, 20));
+        OvalRenderable haloRenderable = new OvalRenderable(COLOR_OF_SUN_HALO);
         GameObject sunHalo = new GameObject(initialPosition, new Vector2(haloSize, haloSize),
                 haloRenderable);
         sunHalo.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);

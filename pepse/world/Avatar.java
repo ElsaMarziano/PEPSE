@@ -23,6 +23,10 @@ class Avatar extends GameObject  {
     private static final float VELOCITY_Y = -650;
     private static final float GRAVITY = 600;
     private static final Color AVATAR_COLOR = Color.DARK_GRAY;
+    private static final float ENERGY_CONSUMPTION_MOVE = 0.5f;
+    private static final float ENERGY_CONSUMPTION_JUMP = 10f;
+    private static final float ENERGY_REGEN_RATE = 1f;
+    private static final double MAX_ENERGY = 100;
     private AnimationRenderable runAnimation = null;
     private AnimationRenderable jumpAnimation = null;
     private AnimationRenderable idleAnimation = null;
@@ -86,7 +90,8 @@ class Avatar extends GameObject  {
         float xVel = 0;
         if(this.energy <0.5) transform().setVelocityX(0);
 // Go left
-        if (inputListener.isKeyPressed(KeyEvent.VK_LEFT) && this.energy >=0.5) {
+        if (inputListener.isKeyPressed(KeyEvent.VK_LEFT) && this.energy >=
+                ENERGY_CONSUMPTION_JUMP) {
             xVel -= VELOCITY_X;
             this.energy -= 0.5;
             transform().setVelocityX(xVel);
@@ -96,7 +101,8 @@ class Avatar extends GameObject  {
             }
         }
         // Go right
-        else if (inputListener.isKeyPressed(KeyEvent.VK_RIGHT) && this.energy >= 0.5) {
+        else if (inputListener.isKeyPressed(KeyEvent.VK_RIGHT) && this.energy >=
+                ENERGY_CONSUMPTION_JUMP) {
             xVel += VELOCITY_X;
             this.energy -= 0.5;
             transform().setVelocityX(xVel);
@@ -105,15 +111,16 @@ class Avatar extends GameObject  {
                 this.renderer().setIsFlippedHorizontally(false);
             }
             // Jump
-        } else if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && getVelocity().y() == 0 && this.energy >= 10) {
+        } else if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && getVelocity().y() == 0
+                && this.energy >= ENERGY_CONSUMPTION_JUMP) {
                 transform().setVelocityY(VELOCITY_Y);
-                this.energy -= 10;
+                this.energy -= ENERGY_CONSUMPTION_JUMP;
                 this.notifyObservers();
             if(this.jumpAnimation != null) this.renderer().setRenderable(this.jumpAnimation);
             // Stay still
         } else if (inputListener.pressedKeys().isEmpty() ){
-            if(this.energy <=100 && getVelocity().y() == 0) {
-                this.energy = Math.min(100, this.energy + 1);
+            if(this.energy <= MAX_ENERGY && getVelocity().y() == 0) {
+                this.energy = Math.min(MAX_ENERGY, this.energy + 1);
                 if(this.idleAnimation != null) this.renderer().setRenderable(this.idleAnimation);
             }
             transform().setVelocityX(xVel);
@@ -132,7 +139,7 @@ class Avatar extends GameObject  {
      * Adds energy to the avatar. This function is passed to the fruits
      */
     public void add10Energy() {
-        this.energy = Math.min(this.energy + 10, 100);
+        this.energy = Math.min(this.energy + 10, MAX_ENERGY);
     }
 
     /**

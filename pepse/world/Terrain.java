@@ -15,6 +15,8 @@ import java.util.List;
 public class Terrain {
     private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
     private static final int TERRAIN_DEPTH = 20;
+    private static final float HORIZONTAL_HEIGHT = (float) (2 / 3);
+    private static final double NOISE_FACTOR = Block.SIZE * 7;
     private final NoiseGenerator noiseGenerator;
     private final float groundHeightAtX0;
 
@@ -24,7 +26,7 @@ public class Terrain {
      * @param seed something
      */
     public Terrain(Vector2 windowDimensions, int seed) {
-        this.groundHeightAtX0 = windowDimensions.y() * 2/3;
+        this.groundHeightAtX0 = windowDimensions.y() * HORIZONTAL_HEIGHT;
         this.noiseGenerator = new NoiseGenerator((double) seed, (int) groundHeightAtX0);
     }
 
@@ -34,7 +36,7 @@ public class Terrain {
      * @return ground height at X
      */
     public float groundHeightAt(float x) {
-        float noise = (float) noiseGenerator.noise(x, Block.SIZE *7);
+        float noise = (float) noiseGenerator.noise(x, NOISE_FACTOR);
         return groundHeightAtX0 + noise;
     }
 
