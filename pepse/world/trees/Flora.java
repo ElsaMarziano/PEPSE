@@ -81,8 +81,8 @@ public class Flora {
      */
     private void createLeaves(Vector2 treeTop, List<GameObject> leaves) {
         Random random = new Random();
-        for(int i=-LEAVES_RADIUS; i< LEAVES_RADIUS; i+=Block.SIZE / 2) {
-            for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE / 2) {
+        for(int i=-LEAVES_RADIUS; i< LEAVES_RADIUS; i+=Block.SIZE) {
+            for(int j=-LEAVES_RADIUS; j< LEAVES_RADIUS; j+=Block.SIZE) {
                 if (random.nextFloat() <= 0.1) {
                     Vector2 pos = treeTop.add(new Vector2(i, j));
                     GameObject leaf = new Leaf(pos);

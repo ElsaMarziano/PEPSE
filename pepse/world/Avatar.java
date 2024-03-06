@@ -130,7 +130,6 @@ class Avatar extends GameObject  {
 
     /**
      * Adds energy to the avatar. This function is passed to the fruits
-     * @param energy energy to add
      */
     public void add10Energy() {
         this.energy = Math.min(this.energy + 10, 100);
@@ -144,10 +143,18 @@ class Avatar extends GameObject  {
     public String getTag() {
         return "Avatar";
     }
+
+    /**
+     * Add new observer to the list of observers.
+     * @param observer - some GameObject that affects by jumping the Avatar.
+     */
     public void registerObserver(GameObject observer) {
         observers.add((AvatarObserver) observer);
     }
 
+    /*
+     * Affects the observers when the Avatar jump.
+     */
     private void notifyObservers() {
         for (AvatarObserver observer : observers) {
             observer.notifyJump();

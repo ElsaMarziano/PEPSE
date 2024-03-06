@@ -14,9 +14,9 @@ public class StaticTree extends GameObject  implements AvatarObserver {
     private Color treeColor;
 
     private Color[] brownShades = {
-            new Color(139, 69, 19),
+            new Color(152, 97, 70),
             new Color(160, 82, 45),
-            new Color(139, 115, 85)
+            new Color(72, 50, 25)
     };
 
     public StaticTree(Vector2 topLeftCorner, float size) {
@@ -28,7 +28,9 @@ public class StaticTree extends GameObject  implements AvatarObserver {
         physics().setMass(GameObjectPhysics.IMMOVABLE_MASS);
     }
 
-
+    /**
+     * When the Avatar is jump - the trees change there brown shade.
+     */
     @Override
     public void notifyJump() {
         Random random = new Random();

@@ -59,6 +59,10 @@ public class Fruit extends GameObject implements AvatarObserver {
         }
     }
 
+    /**
+     * Notifies the fruit that the avatar has jumped.
+     * Changes the color of the fruit when the avatar jumps.
+     */
     @Override
     public void notifyJump() {
         Random random = new Random();

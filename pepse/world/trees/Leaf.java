@@ -12,9 +12,18 @@ import pepse.util.pepse.world.Block;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Represents a leaf GameObject that reacts to the avatar's jump action.
+ */
 public class Leaf extends GameObject implements AvatarObserver {
     private static final Color LEAVE_COLOR = new Color(50, 200, 30);
 
+    /**
+     * Constructs a Leaf object at the specified position.
+     * The leaf will sway back and forth periodically.
+     *
+     * @param pos The position of the leaf.
+     */
     public Leaf(Vector2 pos){
         super(pos, Vector2.ONES.mult(Block.SIZE),
                 new RectangleRenderable(ColorSupplier.approximateColor(LEAVE_COLOR)));
@@ -28,6 +37,10 @@ public class Leaf extends GameObject implements AvatarObserver {
                         null));
         ;
     }
+    /**
+     * Notifies the leaf about the avatar's jump action.
+     * This method rotates the leaf vertically when the avatar jumps.
+     */
     @Override
     public void notifyJump() {
         new Transition<Float>(
