@@ -9,6 +9,9 @@ import danogl.util.Vector2;
  * This class represent a single block of constant size that doesn't move when collided with
  */
 public class Block extends GameObject {
+    /**
+     * Default size for blocks
+     */
     public static final int SIZE = 30;
 
     /**

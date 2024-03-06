@@ -1,0 +1,14 @@
+e342791191,
+342791191,
+
+We decided to creates 3 classes in the tree package:
+- Fruit: A class that creates a single fruit and handles its collision with the avatar
+- StaticTree: A class that creates the base of a tree and handles the physics and gravity of the
+tree
+- Flora: A class that handles the creation of the floral part of the game. Flora receives a function
+ to get the height of the ground at any given point, and a function that decides what happens with
+ the avatar when it collides with a fruits.
+ Flora has private functions that creates every element, and a public one that creates everything
+ and returns a map of every created object by category.
+Flora create multiple instances of Fruit and StaticTree.
+.8.2.4.3 האם השתמשתם בתבנית עיצוב כלשהי?
