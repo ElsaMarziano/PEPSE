@@ -1,7 +1,7 @@
 e342791191,
 342791191,
 
-We decided to creates 3 classes in the tree package:
+We decided to creates 4 classes in the tree package:
 - Fruit: A class that creates a single fruit and handles its collision with the avatar
 - StaticTree: A class that creates the base of a tree and handles the physics and gravity of the
 tree
@@ -11,4 +11,9 @@ tree
  Flora has private functions that creates every element, and a public one that creates everything
  and returns a map of every created object by category.
 Flora create multiple instances of Fruit and StaticTree.
-.8.2.4.3 האם השתמשתם בתבנית עיצוב כלשהי?
+- Leaf: The Leaf class creates and manages leaves on trees in the Pepse game.
+ It handles their appearance, positioning, and interaction with the avatar.
+ Leaves may respond to the avatar's actions and exhibit dynamic behavior.
+
+ We used the observer design pattern, so that the trees, fruits and leaves followed the behavior of
+ the avatar and were affected by it according to the requirements of the exercise.
