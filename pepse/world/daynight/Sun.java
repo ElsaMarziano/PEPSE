@@ -14,7 +14,7 @@ import java.awt.*;
 public class Sun {
     private static final float SUN_DIAMETER = 50;
     private static final float SUN_POSITION_X_RATIO = 0.5f;
-    private static final float SUN_POSITION_Y_RATIO = 2 / 3f;
+    private static final float SUN_POSITION_Y_RATIO = 1 / 3f;
     private static final float SUN_ANIMATION_START_ANGLE = 0f;
     private static final float SUN_ANIMATION_END_ANGLE = 360f;
 
@@ -40,10 +40,10 @@ public class Sun {
                 sun,
                 (Float angle) -> sun.setCenter(startTopLeftCorner
                         .subtract(new Vector2(windowDimensions.x() * SUN_POSITION_X_RATIO,
-                                windowDimensions.y() * SUN_POSITION_Y_RATIO))
+                                2* windowDimensions.y() * SUN_POSITION_Y_RATIO))
                         .rotated(angle)
                         .add(new Vector2(windowDimensions.x() * SUN_POSITION_X_RATIO,
-                                windowDimensions.y() * SUN_POSITION_Y_RATIO))),
+                                2 * windowDimensions.y() * SUN_POSITION_Y_RATIO))),
                 SUN_ANIMATION_START_ANGLE, SUN_ANIMATION_END_ANGLE,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
                 cycleLength,

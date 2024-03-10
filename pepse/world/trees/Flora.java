@@ -21,7 +21,7 @@ import java.util.function.Function;
 public class Flora {
     private static final int LEAVES_RADIUS = 50;
     private static final float TREE_CREATION_PROBABILITY = 0.1f;
-    private static final float LEAF_CREATION_PROBABILITY = 0.1f;
+    private static final float LEAF_CREATION_PROBABILITY = 0.5f;
     private static final float FRUIT_CREATION_PROBABILITY = 0.3f;
     private final Function<Float, Float> getGroundHeight;
     private final Runnable onAvatarCollision;

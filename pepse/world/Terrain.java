@@ -15,7 +15,7 @@ import java.util.List;
 public class Terrain {
     private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
     private static final int TERRAIN_DEPTH = 20;
-    private static final float HORIZONTAL_HEIGHT = (float) (2 / 3);
+    private static final float HORIZONTAL_HEIGHT =  2 / 3f;
     private static final double NOISE_FACTOR = Block.SIZE * 7;
     private final NoiseGenerator noiseGenerator;
     private final float groundHeightAtX0;
@@ -41,14 +41,13 @@ public class Terrain {
     }
 
     public List<Block> createInRange(int minX, int maxX) {
-        RectangleRenderable renderable =
-                new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
         List<Block> blocks = new ArrayList<>();
         for (int i = minX; i <= maxX; i+=Block.SIZE) {
             int top = (int) groundHeightAt(i);
-//            int top = (int) Math.floor(groundHeightAt(i) / Block.SIZE) * Block.SIZE;
             for (int j = top; j <= top + TERRAIN_DEPTH * Block.SIZE; j+=Block.SIZE) {
-                Block block = new Block(new Vector2(i, j), renderable);
+                Block block = new Block(new Vector2(i, j),
+                        new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR))
+);
                 block.setTag("ground");
                 blocks.add(block);
             }

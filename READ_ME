@@ -1,5 +1,5 @@
-e342791191,
-342791191,
+e342791191, archsak
+342791191, 207600164
 
 We decided to creates 4 classes in the tree package:
 - Fruit: A class that creates a single fruit and handles its collision with the avatar
@@ -12,7 +12,7 @@ tree
  and returns a map of every created object by category.
 Flora create multiple instances of Fruit and StaticTree.
 - Leaf: The Leaf class creates and manages leaves on trees in the Pepse game.
- It handles their appearance, positioning, and interaction with the avatar.
+ It handles their appearance, position, and interaction with the avatar.
  Leaves may respond to the avatar's actions and exhibit dynamic behavior.
 
  We used the observer design pattern, so that the trees, fruits and leaves followed the behavior of
